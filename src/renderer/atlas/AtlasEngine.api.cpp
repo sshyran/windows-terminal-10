@@ -664,8 +664,8 @@ void AtlasEngine::_resolveFontMetrics(const wchar_t* requestedFaceName, const Fo
     // Our cells can't overlap each other so we additionally clamp the bottom line to be inside the cell boundaries.
     doubleUnderlinePosBottom = std::min(doubleUnderlinePosBottom, lineHeight - thinLineWidth);
 
-    const auto cellWidth = gsl::narrow<u16>(std::lroundf(advanceWidth));
-    const auto cellHeight = gsl::narrow<u16>(lineHeight);
+    const auto cellWidth = gsl::narrow<u16>(std::lroundf(fontInfoDesired.GetCellSizeAdjustmentX().AdjustValue(advanceWidth, _api.dpi)));
+    const auto cellHeight = gsl::narrow<u16>(std::lroundf(fontInfoDesired.GetCellSizeAdjustmentY().AdjustValue(lineHeight, _api.dpi)));
 
     {
         til::size coordSize;
